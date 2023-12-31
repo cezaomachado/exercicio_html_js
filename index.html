@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário com Validação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #mensagem {
+      margin-top: 16px;
+      font-weight: bold;
+    }
+
+    .invalido {
+      color: #dc3545; /* vermelho para mensagem negativa */
+    }
+
+    .valido {
+      color: #28a745; /* verde para mensagem positiva */
+    }
+  </style>
+</head>
+<body>
+
+  <form id="meuFormulario">
+    <label for="campoA">Campo A:</label>
+    <input type="number" id="campoA" name="campoA" required>
+    <br>
+    <label for="campoB">Campo B:</label>
+    <input type="number" id="campoB" name="campoB" required>
+    <br>
+    <button type="button" onclick="validarFormulario()">Submeter</button>
+  </form>
+
+  <div id="mensagem"></div>
+
+  <script>
+    function validarFormulario() {
+      let valorA = parseFloat(document.getElementById('campoA').value);
+      let valorB = parseFloat(document.getElementById('campoB').value);
+
+      let mensagemDiv = document.getElementById('mensagem');
+
+      if (isNaN(valorA) || isNaN(valorB) || valorB <= valorA) {
+        exibirMensagem('Formulário inválido. Certifique-se de que B é maior que A.', 'invalido');
+      } else {
+        exibirMensagem('Formulário válido. B é maior que A.', 'valido');
+      }
+    }
+
+    function exibirMensagem(mensagem, classe) {
+      let mensagemDiv = document.getElementById('mensagem');
+      mensagemDiv.innerText = mensagem;
+      mensagemDiv.className = classe;
+    }
+  </script>
+
+</body>
+</html>
